@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import { Box, Flex } from "reflexbox";
 
@@ -32,22 +32,34 @@ const errorOnMessage = () => {
 export const Input = ({ onMessage = errorOnMessage }) => {
   const [text, setText] = useState("");
 
-  const handleSendMessage = () => {
-    if (text == "") {
-      console.warn("Text is empty");
-      return;
-    }
-    console.log("Sending:", text);
-    try {
-      onMessage(text);
-    } catch (error) {
-      console.error(error);
-    }
-    setText("");
-  };
+  const {
+    handleSendMessage,
+    handleInputChange,
+    handleKeyboard,
+  } = useMemo(() => {
+    console.log("render🚧");
+    const handleSendMessage = () => {
+      if (text == "") {
+        console.warn("Text is empty");
+        return;
+      }
+      console.log("Sending:", text);
+      try {
+        onMessage(text);
+      } catch (error) {
+        console.error(error);
+      }
+      setText("");
+    };
+    const handleKeyboard = (e) => e.key === "Enter" && handleSendMessage();
+    const handleInputChange = (e) => setText(e.target.value);
+    return {
+      handleSendMessage,
+      handleInputChange,
+      handleKeyboard,
+    };
+  }, [onMessage]);
 
-  const handleKeyboard = (e) => e.key === "Enter" && handleSendMessage();
-  const handleInputChange = (e) => setText(e.target.value);
   return (
     <Flex>
       <Box width={4 / 5}>

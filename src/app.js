@@ -14,6 +14,7 @@ const Container = styled(Flex).attrs({
 
 export const App = () => {
   const { theme } = useTheme();
+
   return (
     <Flex flexDirection="column" p={4}>
       <Global
