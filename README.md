@@ -4,7 +4,7 @@
 
 # Meetup 10 Noviembre 2020: React Hooks
 
-* **Youtube**: TBD
+* **Youtube**: https://www.youtube.com/watch?v=7VGNQhdNzh4
 
 ## About [Coreof.tech](https://www.coreof.tech/)
 
